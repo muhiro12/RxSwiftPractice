@@ -7,17 +7,21 @@
 //
 
 import UIKit
+import RxCocoa
 
 class ViewController: UIViewController {
-    @IBOutlet weak var firstText: UITextField!
+    @IBOutlet weak var firstText: UILabel!
     @IBOutlet weak var firstButton: UIButton!
-    @IBOutlet weak var secondText: UILabel!
+    @IBOutlet weak var secondText: UITextField!
     @IBOutlet weak var secondButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        firstText.delegate = self
+        secondText.delegate = self
+
+        _ = secondText.rx.text
+            .bind(to: firstText.rx.text)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
